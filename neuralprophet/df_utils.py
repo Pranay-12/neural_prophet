@@ -1303,6 +1303,7 @@ def infer_frequency(df, freq, n_lags, min_freq_percentage=0.7):
     df, _, _, _ = prep_or_copy_df(df)
     freq_df = list()
     for df_name, df_i in df.groupby("ID"):
+        df_i = df_i.reset_index(drop=True)
         freq_df.append(_infer_frequency(df_i, freq, min_freq_percentage))
     if len(set(freq_df)) != 1 and n_lags > 0:
         raise ValueError(
